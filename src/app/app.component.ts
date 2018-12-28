@@ -1,20 +1,43 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
     @ViewChild('f') myForm: NgForm;
     defaultQuestion = 'teacher';
+    answer = '';
+    genders = ['male', 'female'];
+    radioSelected: string;
 
-  suggestUserName() {
-    const suggestedName = 'Superuser';
-  }
+    constructor() {
+        this.radioSelected = 'female';
+    }
 
-  onSubmit() {
-        console.log(this.myForm);
-  }
+    suggestUserName() {
+        const suggestedName = 'Superuser';
+        // this.myForm.setValue({
+        //     userData: {
+        //         username: suggestedName,
+        //         email: ''
+        //     },
+        //     secret: 'pet',
+        //     questionAnswer: '',
+        //     gender: 'female'
+        // });
+
+        this.myForm.form.patchValue({
+            userData: {
+                username: suggestedName
+            }
+        });
+
+    }
+
+    onSubmit() {
+        console.log(this.myForm.value);
+    }
 }
