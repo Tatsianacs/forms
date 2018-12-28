@@ -12,6 +12,14 @@ export class AppComponent {
     answer = '';
     genders = ['male', 'female'];
     radioSelected: string;
+    user = {
+        username: '',
+        email: '',
+        question: '',
+        answer: '',
+        gender: ''
+    };
+    submitted = false;
 
     constructor() {
         this.radioSelected = 'female';
@@ -38,6 +46,14 @@ export class AppComponent {
     }
 
     onSubmit() {
+        this.submitted = true;
         console.log(this.myForm.value);
+        this.user.username = this.myForm.value.userData.username;
+        this.user.email = this.myForm.value.userData.email;
+        this.user.question = this.myForm.value.secret;
+        this.user.answer = this.myForm.value.questionAnswer;
+        this.user.gender = this.myForm.value.gender;
+
+        this.myForm.reset();
     }
 }
